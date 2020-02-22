@@ -63,30 +63,17 @@ namespace Reputation_Overhaul
         internal static ModSettings Settings;
     }
 
-    //[HarmonyPatch(typeof(SimGameState), "OnDayPassed")]
-    //public static class SimGameState_OnDayPassed_Patch
-    //{
-    //    static void Prefix(SimGameState __instance, int timeLapse)
-    //    {
-    //        Log("Something");
-    //    }
-    //}
 
-
-    //This following patch is logging nothing at all! 
     //Increase Contract value based upon MRB Rating.
-    [HarmonyPatch(typeof(Contract), "SetInitialReward")]
-    public static class Contract_SetInitialReward_Patch
+    [HarmonyPatch(typeof(SimGameState), "PrepContract")]
+    public static class SGS_PrepContract_Patch
     {
-        static void Prefix(Contract __instance, ref int cbills)
+        static void Postfix(SimGameState __instance, ref Contract contract)
         {
-            Log("Initial Reward");
-            var sim = __instance.BattleTechGame.Simulation;
-            var MRBRep = sim.GetReputation(sim.GetFactionDef("MercenaryReviewBoard").FactionValue);
-            Log(MRBRep.ToString());
-            Log(cbills.ToString());
-            Log(sim.Constants.Story.MRBRepMaxCap.ToString());
-            cbills += (int)((float)cbills / sim.Constants.Story.MRBRepMaxCap);
+            var MRBRep = __instance.GetRawReputation(__instance.GetFactionDef("MercenaryReviewBoard").FactionValue);
+            float initialCV = (float)contract.InitialContractValue;
+            int newInitialContractValue = (int)(initialCV + initialCV * (MRBRep / __instance.Constants.Story.MRBRepMaxCap));
+            Traverse.Create(contract).Property("InitialContractValue").SetValue(newInitialContractValue);
         }
     }
 }
