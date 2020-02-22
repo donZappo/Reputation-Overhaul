@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
-VisualStudioVersion = 16.0.28803.352
+VisualStudioVersion = 16.0.29201.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reputation Overhaul", "Generic Template\Reputation Overhaul.csproj", "{5683EA63-5737-4732-B5AA-8C307C949BC7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reputation Overhaul", "Reputation Overhaul\Reputation Overhaul.csproj", "{5683EA63-5737-4732-B5AA-8C307C949BC7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +20,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {8143B20F-339C-41E4-950E-E905CA5DCE11}
+		SolutionGuid = {1C4DB445-372A-4752-A58E-200950C007AF}
 	EndGlobalSection
 EndGlobal

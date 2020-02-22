@@ -4,6 +4,7 @@ using System.Reflection;
 using Harmony;
 using Newtonsoft.Json;
 using static Reputation_Overhaul.Logger;
+using BattleTech;
 
 namespace Reputation_Overhaul
 {
@@ -13,7 +14,7 @@ namespace Reputation_Overhaul
 
         public static void Init(string modDir, string settings)
         {
-            var harmony = HarmonyInstance.Create("com.Same.BattleTech.GalaxyAtWar");
+            var harmony = HarmonyInstance.Create("Reputation.Overhaul");
             harmony.PatchAll(Assembly.GetExecutingAssembly());
             // read settings
             try
@@ -62,7 +63,31 @@ namespace Reputation_Overhaul
         internal static ModSettings Settings;
     }
 
+    //[HarmonyPatch(typeof(SimGameState), "OnDayPassed")]
+    //public static class SimGameState_OnDayPassed_Patch
+    //{
+    //    static void Prefix(SimGameState __instance, int timeLapse)
+    //    {
+    //        Log("Something");
+    //    }
+    //}
 
-    
+
+    //This following patch is logging nothing at all! 
+    //Increase Contract value based upon MRB Rating.
+    [HarmonyPatch(typeof(Contract), "SetInitialReward")]
+    public static class Contract_SetInitialReward_Patch
+    {
+        static void Prefix(Contract __instance, ref int cbills)
+        {
+            Log("Initial Reward");
+            var sim = __instance.BattleTechGame.Simulation;
+            var MRBRep = sim.GetReputation(sim.GetFactionDef("MercenaryReviewBoard").FactionValue);
+            Log(MRBRep.ToString());
+            Log(cbills.ToString());
+            Log(sim.Constants.Story.MRBRepMaxCap.ToString());
+            cbills += (int)((float)cbills / sim.Constants.Story.MRBRepMaxCap);
+        }
+    }
 }
 
