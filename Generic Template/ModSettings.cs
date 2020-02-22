@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using BattleTech;
 
-namespace General_Tools
+namespace Reputation_Overhaul
 {
     public class ModSettings
     {

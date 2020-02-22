@@ -3,9 +3,9 @@ using System.Collections;
 using System.Reflection;
 using Harmony;
 using Newtonsoft.Json;
-using static General_Tools.Logger;
+using static Reputation_Overhaul.Logger;
 
-namespace General_Tools
+namespace Reputation_Overhaul
 {
     public static class Core
     {

@@ -5,10 +5,10 @@ using BattleTech.Save.Test;
 using Harmony;
 using Newtonsoft.Json;
 using UnityEngine;
-using static General_Tools.Logger;
+using static Reputation_Overhaul.Logger;
 using BattleTech.Save;
 
-namespace Test_Mod
+namespace Reputation_Overhaul
 {
     public static class SaveHandling
     {

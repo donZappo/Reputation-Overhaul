@@ -2,7 +2,7 @@
 using System.IO;
 using System.Reflection;
 
-namespace General_Tools
+namespace Reputation_Overhaul
 {
     public static class Logger
     {
