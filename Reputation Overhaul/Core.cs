@@ -5,6 +5,8 @@ using Harmony;
 using Newtonsoft.Json;
 using static Reputation_Overhaul.Logger;
 using BattleTech;
+using UnityEngine;
+using BattleTech.Framework;
 
 namespace Reputation_Overhaul
 {
@@ -74,6 +76,43 @@ namespace Reputation_Overhaul
             float initialCV = (float)contract.InitialContractValue;
             int newInitialContractValue = (int)(initialCV + initialCV * (MRBRep / __instance.Constants.Story.MRBRepMaxCap));
             Traverse.Create(contract).Property("InitialContractValue").SetValue(newInitialContractValue);
+        }
+    }
+
+    //Give us complete control over what contracts can and cannot be taken.
+    [HarmonyPatch(typeof(SimGameState), "ContractUserMeetsReputation_Career")]
+    public static class SGS_ContractUserMeetsRep_Patch
+    {
+        static bool Prefix(SimGameState __instance, Contract c)
+        {
+            int num = Mathf.Min(c.Override.finalDifficulty + c.Override.difficultyUIModifier, (int)__instance.Constants.Story.GlobalContractDifficultyMax);
+            int repLevel = __instance.GetCurrentMRBLevel();
+            num += repLevel;
+            FactionValue teamFaction = c.GetTeamFaction("ecc8d4f2-74b4-465d-adf6-84445e5dfc230");
+            if (!teamFaction.DoesGainReputation || c.Override.contractDisplayStyle == ContractDisplayStyle.BaseCampaignStory
+            || c.Override.contractDisplayStyle == ContractDisplayStyle.BaseCampaignRestoration || c.Override.contractDisplayStyle == ContractDisplayStyle.BaseFlashpoint)
+            {
+                return true;
+            }
+            switch (__instance.GetReputation(teamFaction))
+            {
+                case SimGameReputation.LOATHED:
+                    return (float)num <= __instance.Constants.CareerMode.LoathedMaxContractDifficulty;
+                case SimGameReputation.HATED:
+                    return (float)num <= __instance.Constants.CareerMode.HatedMaxContractDifficulty;
+                case SimGameReputation.DISLIKED:
+                    return (float)num <= __instance.Constants.CareerMode.DislikedMaxContractDifficulty;
+                case SimGameReputation.INDIFFERENT:
+                    return (float)num <= __instance.Constants.CareerMode.IndifferentMaxContractDifficulty;
+                case SimGameReputation.LIKED:
+                    return (float)num <= __instance.Constants.CareerMode.LikedMaxContractDifficulty;
+                case SimGameReputation.FRIENDLY:
+                    return (float)num <= __instance.Constants.CareerMode.FriendlyMaxContractDifficulty;
+                default:
+                    return (float)num <= __instance.Constants.CareerMode.HonoredMaxContractDifficulty;
+            }
+
+            return false;
         }
     }
 }
