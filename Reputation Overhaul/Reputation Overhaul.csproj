@@ -64,6 +64,21 @@
     <Compile Include="ModSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="JSONs\mod.json" />
+    <None Include="JSONs\modstate.json" />
+    <None Include="JSONs\simGameConstants\.idea\.idea.simGameConstants.dir\riderModule.iml" />
+    <None Include="JSONs\simGameConstants\SimGameConstants.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="JSONs\simGameConstants\.idea\.idea.simGameConstants.dir\.idea\contentModel.xml" />
+    <Content Include="JSONs\simGameConstants\.idea\.idea.simGameConstants.dir\.idea\encodings.xml" />
+    <Content Include="JSONs\simGameConstants\.idea\.idea.simGameConstants.dir\.idea\indexLayout.xml" />
+    <Content Include="JSONs\simGameConstants\.idea\.idea.simGameConstants.dir\.idea\modules.xml" />
+    <Content Include="JSONs\simGameConstants\.idea\.idea.simGameConstants.dir\.idea\projectSettingsUpdater.xml" />
+    <Content Include="JSONs\simGameConstants\.idea\.idea.simGameConstants.dir\.idea\vcs.xml" />
+    <Content Include="JSONs\simGameConstants\.idea\.idea.simGameConstants.dir\.idea\workspace.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy "$(TargetPath)" "C:\Program Files (x86)\Steam\steamapps\common\BATTLETECH\Mods\ReputationOverhaul" /Y</PostBuildEvent>
