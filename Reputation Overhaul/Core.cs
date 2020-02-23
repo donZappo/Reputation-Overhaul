@@ -115,5 +115,15 @@ namespace Reputation_Overhaul
             return false;
         }
     }
+
+    [HarmonyPatch(typeof(StarSystem), "CanUseSystemStore")]
+    public static class StarSystem_CanUseSystemStore_Patch
+    {
+        static bool Prefix(StarSystem __instance)
+        {
+            FactionValue ownerValue = __instance.Def.OwnerValue;
+            return __instance.Sim.GetReputation(ownerValue) > SimGameReputation.HATED;
+        }
+    }
 }
 
