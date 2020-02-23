@@ -116,6 +116,7 @@ namespace Reputation_Overhaul
         }
     }
 
+    //Blocks system shops from factions that are Hated.
     [HarmonyPatch(typeof(StarSystem), "CanUseSystemStore")]
     public static class StarSystem_CanUseSystemStore_Patch
     {
@@ -123,6 +124,17 @@ namespace Reputation_Overhaul
         {
             FactionValue ownerValue = __instance.Def.OwnerValue;
             return __instance.Sim.GetReputation(ownerValue) > SimGameReputation.HATED;
+        }
+    }
+
+    //More contracts available per system based upon MRB rating.
+    [HarmonyPatch(typeof(StarSystem), "GetSystemMaxContracts")]
+    public static class StarSystem_GetSystemMaxContracts_Patch
+    {
+        static void Postfix(StarSystem __instance, ref int __result)
+        {
+            int repLevel = __instance.Sim.GetCurrentMRBLevel();
+            __result += repLevel;
         }
     }
 }
