@@ -87,7 +87,7 @@ namespace Reputation_Overhaul
         {
             int num = Mathf.Min(c.Override.finalDifficulty + c.Override.difficultyUIModifier, (int)__instance.Constants.Story.GlobalContractDifficultyMax);
             int repLevel = __instance.GetCurrentMRBLevel();
-            num += repLevel;
+            num -= repLevel;
             FactionValue teamFaction = c.GetTeamFaction("ecc8d4f2-74b4-465d-adf6-84445e5dfc230");
             if (!teamFaction.DoesGainReputation || c.Override.contractDisplayStyle == ContractDisplayStyle.BaseCampaignStory
             || c.Override.contractDisplayStyle == ContractDisplayStyle.BaseCampaignRestoration || c.Override.contractDisplayStyle == ContractDisplayStyle.BaseFlashpoint)
