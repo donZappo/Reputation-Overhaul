@@ -90,7 +90,8 @@ namespace Reputation_Overhaul
             num -= repLevel;
             FactionValue teamFaction = c.GetTeamFaction("ecc8d4f2-74b4-465d-adf6-84445e5dfc230");
             if (!teamFaction.DoesGainReputation || c.Override.contractDisplayStyle == ContractDisplayStyle.BaseCampaignStory
-            || c.Override.contractDisplayStyle == ContractDisplayStyle.BaseCampaignRestoration || c.Override.contractDisplayStyle == ContractDisplayStyle.BaseFlashpoint)
+            || c.Override.contractDisplayStyle == ContractDisplayStyle.BaseCampaignRestoration || c.Override.contractDisplayStyle == ContractDisplayStyle.BaseFlashpoint
+            || c.Override.contractDisplayStyle == ContractDisplayStyle.HeavyMetalFlashpointCampaign)
             {
                 return true;
             }
