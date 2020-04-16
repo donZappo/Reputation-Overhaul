@@ -21,7 +21,7 @@
 - Max Contract Availability Per Tier: (1, 2, 3, 5, 7, 8, 9)
   - Original: (1, 2, 3, 6, 8, 9, 10)
 - Affects max contract difficulty in concert with MRB rating.
-- Determines availability of alliance - unchanged.
+- Determines availability of alliance - changed to 75 reputation.
 - Determines break alliance penalty - unchanged.
 - Impact on Rep Values (original value):
   - TargetRepSuccessMod: -0.22 (-0.8)
