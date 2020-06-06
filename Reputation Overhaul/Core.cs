@@ -31,7 +31,8 @@ namespace Reputation_Overhaul
 
             // blank the logfile
             Clear();
-            // PrintObjectFields(Settings, "Settings");
+            PrintObjectFields(Settings, "Settings");
+            harmony.PatchAll(Assembly.GetExecutingAssembly());
         }
         // logs out all the settings and their values at runtime
         internal static void PrintObjectFields(object obj, string name)
