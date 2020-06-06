@@ -132,9 +132,12 @@ namespace Reputation_Overhaul
     [HarmonyPatch(typeof(StarSystem), "GetSystemMaxContracts")]
     public static class StarSystem_GetSystemMaxContracts_Patch
     {
+        static void Prefix(StarSystem __instance)
+        {
+            __instance.Sim.Constants.Story.MaxContractsPerSystem = ModSettings.MaxContractsPerSystem;
+        }
         static void Postfix(StarSystem __instance, ref int __result)
         {
-            __result = ModSettings.MaxContractsPerSystem;
             int repLevel = __instance.Sim.GetCurrentMRBLevel();
             __result += repLevel;
         }
