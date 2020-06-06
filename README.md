@@ -41,4 +41,6 @@
   - Follows vanilla behavior (with faction rep) but adds in the MRB tier of the player.
   - Tiers go from 1-5. 
 - Contracts per system raised by MRB Rating.
+  - Base Max Local Contracts starts at 4.
+  - Max Local Contracts increased by 1 per MRB Tier.
 
