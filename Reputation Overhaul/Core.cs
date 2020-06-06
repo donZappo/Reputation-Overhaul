@@ -134,6 +134,7 @@ namespace Reputation_Overhaul
     {
         static void Postfix(StarSystem __instance, ref int __result)
         {
+            __result = ModSettings.MaxContractsPerSystem;
             int repLevel = __instance.Sim.GetCurrentMRBLevel();
             __result += repLevel;
         }

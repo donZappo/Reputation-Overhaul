@@ -7,5 +7,6 @@ namespace Reputation_Overhaul
     {
         public bool Debug = false;
         public string modDirectory;
+        public static int MaxContractsPerSystem = 4;
     }
 }
