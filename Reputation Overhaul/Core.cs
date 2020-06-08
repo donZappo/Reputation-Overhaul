@@ -135,12 +135,12 @@ namespace Reputation_Overhaul
     {
         static void Prefix(StarSystem __instance)
         {
-            __instance.Sim.Constants.Story.MaxContractsPerSystem = ModSettings.MaxContractsPerSystem;
+            int repLevel = __instance.Sim.GetCurrentMRBLevel();
+            __instance.Sim.Constants.Story.MaxContractsPerSystem = ModSettings.MaxContractsPerSystem + repLevel;
         }
         static void Postfix(StarSystem __instance, ref int __result)
         {
-            int repLevel = __instance.Sim.GetCurrentMRBLevel();
-            __result += repLevel;
+            
         }
     }
 }
